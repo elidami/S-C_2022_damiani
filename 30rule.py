@@ -1,5 +1,9 @@
+import random #librerie usate per generare una stringa casuale 
+import string
+
+
 def generate_state():
-    return ".00."
+    return ''.join(random.choices('0'+'.', k=12))
 
 
 def traduct(string):
