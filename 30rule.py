@@ -16,17 +16,26 @@ def traduct(string,rule_select,symbol0,symbol1):
     #requires as parameter the string to traduce, and an integer associated with the rule to follow and the symbols which we use
     #as before symbol0 is associated with low state while symbol 1 with high
     #and returns the character which is associated to that string
+    #Explanation of the rules:
+    #    30: {"...": '0', "..0": '0', ".0.": '0', "000": '0',
+    #          ".00": '.', "0..": '.', "0.0": '.', "00.": '.'},
+    #    90: {"...": "0", "..0": ".", ".0.": "0", ".00": ".",
+    #         "0..": ".", "0.0": "0", "00.": ".", "000": "0"},
+    #    110: {"...": '0', "..0": '.', ".0.": '.', ".00": '0',
+    #          "0..": '.', "0.0": '.', "00.": '.', "000": '0'},
+    #    184: {"...": ".", "..0": "0", ".0.": ".", ".00": ".",
+    #          "0..": ".", "0.0": "0", "00.": "0", "000": "0"}
     RULES = {30: {symbol0+symbol0+symbol0: symbol1, symbol0+symbol0+symbol1: symbol1, symbol0+symbol1+symbol0: symbol1, symbol1+symbol1+symbol1: symbol1,
-              symbol0+symbol1+symbol1: symbol0, symbol1+symbol0+symbol0: symbol0, symbol1+symbol0+symbol1: symbol0, symbol1+symbol1+symbol0: symbol0},
+                  symbol0+symbol1+symbol1: symbol0, symbol1+symbol0+symbol0: symbol0, symbol1+symbol0+symbol1: symbol0, symbol1+symbol1+symbol0: symbol0},
 
-         90: {symbol0+symbol0+symbol0: symbol1, symbol0+symbol0+symbol1: symbol0, symbol0+symbol1+symbol0: symbol1, symbol0+symbol1+symbol1: symbol0,
-              symbol1+symbol0+symbol0: symbol0, symbol1+symbol0+symbol1: symbol1, symbol1+symbol1+symbol0: symbol0, symbol1+symbol1+symbol1: symbol1},
+             90: {symbol0+symbol0+symbol0: symbol1, symbol0+symbol0+symbol1: symbol0, symbol0+symbol1+symbol0: symbol1, symbol0+symbol1+symbol1: symbol0,
+                  symbol1+symbol0+symbol0: symbol0, symbol1+symbol0+symbol1: symbol1, symbol1+symbol1+symbol0: symbol0, symbol1+symbol1+symbol1: symbol1},
 
-         110: {symbol0+symbol0+symbol0: symbol1, symbol0+symbol0+symbol1: symbol0, symbol0+symbol1+symbol0: symbol0, symbol0+symbol1+symbol1: symbol1,
-               symbol1+symbol0+symbol0: symbol0, symbol1+symbol0+symbol1: symbol0, symbol1+symbol1+symbol0: symbol0, symbol1+symbol1+symbol1: symbol1},
+             110: {symbol0+symbol0+symbol0: symbol1, symbol0+symbol0+symbol1: symbol0, symbol0+symbol1+symbol0: symbol0, symbol0+symbol1+symbol1: symbol1,
+                   symbol1+symbol0+symbol0: symbol0, symbol1+symbol0+symbol1: symbol0, symbol1+symbol1+symbol0: symbol0, symbol1+symbol1+symbol1: symbol1},
 
-         184: {symbol0+symbol0+symbol0: symbol0, symbol0+symbol0+symbol1: symbol1, symbol0+symbol1+symbol0: symbol0, symbol0+symbol1+symbol1: symbol0,
-               symbol1+symbol0+symbol0: symbol0, symbol1+symbol0+symbol1: symbol1, symbol1+symbol1+symbol0: symbol1, symbol1+symbol1+symbol1: symbol1}
+             184: {symbol0+symbol0+symbol0: symbol0, symbol0+symbol0+symbol1: symbol1, symbol0+symbol1+symbol0: symbol0, symbol0+symbol1+symbol1: symbol0,
+                   symbol1+symbol0+symbol0: symbol0, symbol1+symbol0+symbol1: symbol1, symbol1+symbol1+symbol0: symbol1, symbol1+symbol1+symbol1: symbol1}
          }
     return RULES[rule_select][string]
 
