@@ -43,4 +43,4 @@ def test_evolvelen():
     assert len(evolve(generate_state()))==len(generate_state())
 
 risultati=simulation(10)
-for i in risultati: print(i)
+for i in risultati: print(i+"ciao")
