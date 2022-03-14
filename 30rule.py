@@ -3,7 +3,7 @@ import string
 
 
 def generate_state():
-    return ''.join(random.choices('0'+'.', k=12))
+    return ''.join(random.choices('0'+'.', k=12)) #genera stringa casuale di 12 caratteri composta da 0 e .
 
 
 def traduct(string):
