@@ -18,7 +18,7 @@ def evolve(state):
     new_state=traduct(state[-1]+state[0]+state[1])
     for i in range(len(state)-2):
         new_state+=traduct(state[i:i+3])
-    new_state=new_state+traduct(state[-2]+state[-1]+state[1])
+    new_state=new_state+traduct(state[-2]+state[-1]+state[0])
     return new_state
 
 def simulation(nsteps):
