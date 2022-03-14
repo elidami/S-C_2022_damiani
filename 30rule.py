@@ -2,11 +2,13 @@ import random #librerie usate per generare una stringa casuale
 import string
 
 
-def generate_state():
-    return ''.join(random.choices('0'+'.', k=12)) #genera stringa casuale di 12 caratteri composta da 0 e .
-
+def generate_state(leng):
+    return ''.join(random.choices('0'+'.', k=leng)) #Creates a random string of fixed lenght 
 
 def traduct(string):
+    #Traduction function, taking one number and the string to traduct, 
+    #it can produce different rules, 
+    #in particular rule 30, rule 90 rule 110 and rule 184
     rule30 = {"000": '.',
           "00.": '.',
           "0.0": '.',
@@ -25,8 +27,8 @@ def evolve(state):
     new_state=new_state+traduct(state[-2]+state[-1]+state[0])
     return new_state
 
-def simulation(nsteps):
-    initial_state = generate_state()
+def simulation(nsteps,n):
+    initial_state = generate_state(12)
     states_seq = [initial_state]
     for i in range(nsteps):
         old_state = states_seq[-1]
@@ -38,13 +40,13 @@ def test_evolve0():
     assert evolve("0000")=="...."
     
 def test_genType():
-    assert type(generate_state()) is str
+    assert type(generate_state(12)) is str
 
 def test_trad():
     assert traduct("000")=='.'
 
 def test_evolvelen():
-    assert len(evolve(generate_state()))==len(generate_state())
+    assert len(evolve(generate_state(12)))==len(generate_state(12))
 
 risultati=simulation(10)
 for i in risultati: print(i)
