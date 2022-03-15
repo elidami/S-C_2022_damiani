@@ -4,9 +4,9 @@ import string
 
 def generate_state(leng,symbol0,symbol1):
     #Creates a random string of fixed lenght
-    #requires the lenght of the string, and the characters that has to be used to generate the string
+    #requires the lenght of the string, and the characters that have to be used to generate the string
     #symbol0 is associated with the low state while symbol1 with the high state
-    # e returns a random generated string
+    #the function returns a random generated string
     return ''.join(random.choices(symbol0+symbol1, k=leng)) 
 
 def traduct(string,rule_select,symbol0,symbol1):
@@ -41,8 +41,8 @@ def traduct(string,rule_select,symbol0,symbol1):
 
 def evolve(state,rule_select,symbol0,symbol1):
     #Controls evolution of motus, following the traduction function defined above;
-    #require as parameter the state which has to be evolved, an integer to select the rule and the symbols which we use to descrive our cell,
-    #and returns the new state, defined to be both strings
+    #requires as parameter the state which has to be evolved, an integer to select the rule and the symbols which we use to describe our cells,
+    #the function returns the new state, defined to be both strings
     new_state=traduct(state[-1]+state[0]+state[1],rule_select,symbol0,symbol1)
     for i in range(len(state)-2):
         new_state+=traduct(state[i:i+3],rule_select,symbol0,symbol1)
