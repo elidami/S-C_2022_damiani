@@ -17,14 +17,14 @@ def traduct(string,rule_select,symbol0,symbol1):
     #as before symbol0 is associated with low state while symbol 1 with high
     #and returns the character which is associated to that string
     #Explanation of the rules:
-    #    30: {"...": '0', "..0": '0', ".0.": '0', "000": '0',
-    #          ".00": '.', "0..": '.', "0.0": '.', "00.": '.'},
-    #    90: {"...": "0", "..0": ".", ".0.": "0", ".00": ".",
-    #         "0..": ".", "0.0": "0", "00.": ".", "000": "0"},
-    #    110: {"...": '0', "..0": '.', ".0.": '.', ".00": '0',
-    #          "0..": '.', "0.0": '.', "00.": '.', "000": '0'},
-    #    184: {"...": ".", "..0": "0", ".0.": ".", ".00": ".",
-    #          "0..": ".", "0.0": "0", "00.": "0", "000": "0"}
+    #    30: {"000": '1', "001": '1', "010": '1', "111": '1',
+    #          "011": '0', "100": '0', "101": '0', "110": '0'},
+    #    90: {"000": "1", "001": "0", "010": "1", "011": "0",
+    #         "100": "0", "101": "1", "110": "0", "111": "1"},
+    #    110: {"000": '1', "001": '0', "010": '0', "011": '1',
+    #          "100": '0', "101": '0', "110": '0', "111": '1'},
+    #    184: {"000": "0", "001": "1", "010": "0", "011": "0",
+    #          "100": "0", "101": "1", "110": "1", "111": "1"}
     RULES = {30: {symbol0+symbol0+symbol0: symbol1, symbol0+symbol0+symbol1: symbol1, symbol0+symbol1+symbol0: symbol1, symbol1+symbol1+symbol1: symbol1,
                   symbol0+symbol1+symbol1: symbol0, symbol1+symbol0+symbol0: symbol0, symbol1+symbol0+symbol1: symbol0, symbol1+symbol1+symbol0: symbol0},
 
@@ -62,17 +62,48 @@ def simulation(nsteps,string_len=12,rule_select=30,symbol0='.',symbol1='0'):
         states_seq.append(new_state)
     return states_seq
 
-def test_evolve0():
-    assert evolve("0000")=="...."
-    
+#TESTING FOR GENERATION
 def test_genType():
-    assert type(generate_state(12)) is str
+    assert type(generate_state(12,'_','A')) is str
 
-def test_trad():
-    assert traduct("000")=='.'
 
-def test_evolvelen():
-    assert len(evolve(generate_state(12)))==len(generate_state(12))
+#TESTING 30RULE
+def test_evolve_30_low():
+    assert evolve("....",30,'.','0')=="0000"
 
-risultati=simulation(10,12,30,symbol0='.',symbol1='0')
-for i in risultati: print(i)
+def test_trad30():
+    assert traduct("000",30,".","0")=='0'
+
+def test_evolvelen30():
+    assert len(evolve(generate_state(12,'_','A'),30,'_','A'))==len(generate_state(12,'_','A'))
+
+
+#TESTING 90RULE
+def test_evolve_90_low():
+    assert evolve("....",90,'.','0')=="0000"
+
+def test_trad90():
+    assert traduct("000",90,".","0")=='0'
+
+def test_evolvelen90():
+    assert len(evolve(generate_state(12,'_','A'),90,'_','A'))==len(generate_state(12,'_','A'))
+
+#TESTING 110RULE
+def test_evolve_110_low():
+    assert evolve("....",110,'.','0')=="0000"
+
+def test_trad90():
+    assert traduct("000",110,".","0")=='0'
+
+def test_evolvelen110():
+    assert len(evolve(generate_state(12,'_','A'),110,'_','A'))==len(generate_state(12,'_','A'))
+
+#TESTING 184RULE
+def test_evolve_184_low():
+    assert evolve("....",184,'.','0')=="...."
+
+def test_trad184():
+    assert traduct("000",184,".","0")=='0'
+
+def test_evolvelen184():
+    assert len(evolve(generate_state(12,'_','A'),184,'_','A'))==len(generate_state(12,'_','A'))
